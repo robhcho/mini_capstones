@@ -1,4 +1,10 @@
 # price = Faker::Number.decimal(2)
-1000.times do
-store_item = Product.new(name: 'Amazon Echo Dot', price: 29, image: 'nil', description: 'hands-free, voice-controlled device')
-# store_item.save
+100.times do
+store_item = Product.new(name: Faker::Commerce.product_name, price: Faker::Commerce.price, image: 'nil', description: Faker::Commerce.department(2, true))
+store_item.save
+end
+
+
+# Faker::Commerce.product_name
+# Faker::Commerce.price
+# Faker::Commerce.department(2, true)
