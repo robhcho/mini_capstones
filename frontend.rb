@@ -1,10 +1,12 @@
 require 'unirest'
 base_url = 'localhost:3000'
 
+p 'Choose an option'
 p '[1] See all products'
 p '[2] See one particular product'
 p '[3] Add a product to the database'
 p '[4] Update a product'
+p '[5] Remove an product'
 
 user_input = gets.chomp
   if user_input == '1'
@@ -36,10 +38,18 @@ user_input = gets.chomp
     the_params['name'] = gets.chomp
     p "Tell me the new price of the product. The current price of this product is #{product['price']}"
     the_params['price'] = gets.chomp
+    p "Insert a picture of the product."
+    the_params['image'] = gets.chomp
     p "Write a new description of the product product. The description of the product currently says #{product['description']}"
     the_params['description'] = gets.chomp
+    the_params.delete_if{ |key, value| value.empty? }
     response = Unirest.patch("#{base_url}/products/#{product_id}", parameters: the_params)
     p response.body
+  elsif user_input == '5'
+    p 'Which item would you like to remove?'
+    product_id = gets.chomp
+    response = Unirest.delete("#{base_url}/products/#{product_id}")
+    p "You removed item #{product_id}"
   end
 # Unirest.post()
 

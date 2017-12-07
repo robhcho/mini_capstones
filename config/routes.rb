@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/products/:id' => 'products#show'
   post '/products' => 'products#create'
   patch '/products/:id' => 'products#update'
+  delete '/products/:id' => 'products#destroy'
 
 
   # get '/online_store' => 'products#display_items'

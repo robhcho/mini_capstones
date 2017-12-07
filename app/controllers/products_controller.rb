@@ -25,11 +25,21 @@ class ProductsController < ApplicationController
   def update
     id_number = params['id']
     product = Product.find_by(id: id_number)
-    product.name = params['name']
-    product.price = params['price']
-    product.image = params['image']
-    product.description = params['description']
+    product.name = params['name'] || product.name
+    product.price = params['price'] || product.price
+    product.image = params['image'] || product.image
+    product.description = params['description'] || product.description
     product.save
+
+    render json: product.as_json
+  end
+
+  def destroy
+    id_number = params['id']
+    product = Product.find_by(id: id_number)
+    product.destroy
+
+    render json: product.as_json
   end
 
   # def display_items
