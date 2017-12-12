@@ -54,7 +54,3 @@ user_input = gets.chomp
     response = Unirest.delete("#{base_url}/products/#{product_id}")
     p "You removed item #{product_id}"
   end
-# Unirest.post()
-
-# response = Unirest.get('http://localhost:3000/online_store')
-# items = response.body

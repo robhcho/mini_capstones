@@ -26,7 +26,7 @@ class ProductsController < ApplicationController
   end
 
   def update
-    id_number = params['id']
+    id_number = params[:id]
     product = Product.find_by(id: id_number)
     product.name = params['name'] || product.name
     product.price = params['price'] || product.price
