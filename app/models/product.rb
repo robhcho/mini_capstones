@@ -1,14 +1,21 @@
 class Product < ApplicationRecord
+  validates :name, uniqueness: true
+  validates :name, presence: true
+  validates :price, presence: true
+  validates :price, numericality: { greater_than: 0 }
+  validates :description, presence: true
+  validates :description, length: { minimum: 10 }
   def as_json
     {
-      id: id,
+      # id: id,
       name: name,
       price: price,
       image: image,
       description: description,
       discounted?: is_discounted?,
       tax: tax,
-      total: total
+      total: total,
+      in_stock?: in_stock?
     }
   end
 

@@ -1,4 +1,5 @@
 require 'unirest'
+require 'pp'
 base_url = 'localhost:3000'
 
 p 'Choose an option'
@@ -11,13 +12,13 @@ p '[5] Remove an product'
 user_input = gets.chomp
   if user_input == '1'
     response = Unirest.get("#{base_url}/products")
-    p response.body
+    pp response.body
   elsif user_input == '2'
     p 'What is the id number of the product you would like to view?'
     product_id = gets.chomp
 
     response = Unirest.get("#{base_url}/products/#{product_id}")
-    p response.body
+    pp response.body
   elsif user_input == '3'
     the_params = {}
     p 'Tell me what your product is'
@@ -26,8 +27,10 @@ user_input = gets.chomp
     the_params['price'] = gets.chomp
     p 'Tell me a description of your product'
     the_params['description'] = gets.chomp
+    p 'Insert an image of your product'
+    the_params['image'] = gets.chomp™
     response = Unirest.post("#{base_url}/products", parameters: the_params)
-    p response.body
+    pp response.body
   elsif user_input == '4'
     p 'Enter the id number of the product you would like to modify'
     product_id = gets.chomp
@@ -44,7 +47,7 @@ user_input = gets.chomp
     the_params['description'] = gets.chomp
     the_params.delete_if{ |key, value| value.empty? }
     response = Unirest.patch("#{base_url}/products/#{product_id}", parameters: the_params)
-    p response.body
+    pp response.body
   elsif user_input == '5'
     p 'Which item would you like to remove?'
     product_id = gets.chomp
