@@ -4,6 +4,7 @@ base_url = 'localhost:3000'
 
 p 'Choose an option'
 p '[1] See all products'
+p '[1b] Search through products'
 p '[2] See one particular product'
 p '[3] Add a product to the database'
 p '[4] Update a product'
@@ -12,6 +13,11 @@ p '[5] Remove an product'
 user_input = gets.chomp
   if user_input == '1'
     response = Unirest.get("#{base_url}/products")
+    pp response.body
+  elsif user_input == '1b'
+    p 'What product would you like to search for?'
+    search_input = gets.chomp
+    response = Unirest.get("#{base_url}/products", parameters: {search_name:search_input})
     pp response.body
   elsif user_input == '2'
     p 'What is the id number of the product you would like to view?'

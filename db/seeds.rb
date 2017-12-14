@@ -1,5 +1,10 @@
 Product.destroy_all
 
+# 100.times do
+# store_item = Product.new(name: Faker::Commerce.product_name, price: Faker::Commerce.price, image: 'nil', description: Faker::Commerce.department(2, true))
+# store_item.save
+# end
+
 Product.create!([
   {name: "Amazon Echo Dot", price: "29.0", image: "nil", description: "hands-free, voice-controlled device", in_stock?: true, quanitity: nil},
   {name: "Durable Granite Shirt", price: "23.0", image: "nil", description: "Books & Shoes", in_stock?: true, quanitity: nil},
