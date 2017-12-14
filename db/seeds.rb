@@ -1,8 +1,9 @@
 Product.destroy_all
 
-# 100.times do
-# store_item = Product.new(name: Faker::Commerce.product_name, price: Faker::Commerce.price, image: 'nil', description: Faker::Commerce.department(2, true))
-# store_item.save
+# 3.times do
+# supplier = Supplier.new(name: Faker::Company.name, email: nil, phone_number: Faker::PhoneNumber.phone_number)
+# supplier.save
+# # p supplier
 # end
 
 Product.create!([

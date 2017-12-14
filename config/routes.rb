@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   patch '/products/:id' => 'products#update'
   delete '/products/:id' => 'products#destroy'
 
-
+  get '/suppliers' => 'suppliers#index'
+  get '/suppliers/:id' => 'suppliers#show'
+  post '/suppliers' => 'suppliers#create'
   # get '/online_store' => 'products#display_items'
   # get '/single_item' => 'products#show_single_item'
   # get '/display_one/:item_number' => 'products#show_single_item'

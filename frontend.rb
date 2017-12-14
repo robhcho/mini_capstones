@@ -9,7 +9,9 @@ p '[2] See one particular product'
 p '[3] Add a product to the database'
 p '[4] Update a product'
 p '[5] Remove an product'
-
+p '[6] See all the suppliers'
+p '[7] See a particular supplier'
+p '[8] Add a supplier'
 user_input = gets.chomp
   if user_input == '1'
     response = Unirest.get("#{base_url}/products")
@@ -59,4 +61,24 @@ user_input = gets.chomp
     product_id = gets.chomp
     response = Unirest.delete("#{base_url}/products/#{product_id}")
     p "You removed item #{product_id}"
+  elsif user_input == '6'
+    response = Unirest.get("#{base_url}/suppliers")
+    pp response.body
+  elsif user_input == '7'
+    p 'Enter the id number of the supplier you would like to view'
+    supplier_id = gets.chomp
+    response = Unirest.get("#{base_url}/suppliers/#{supplier_id}")
+    pp response.body
+  elsif user_input == '8'
+    the_params = {}
+    p 'Who is the supplier?'
+    the_params['name'] = gets.chomp
+    p 'What is the email of the supplier'
+    the_params['email'] = gets.chomp
+    p 'What is the phone number of the supplier'
+    the_params['phone_number'] = gets.chomp
+    p 'Insert an image of your product'
+    the_params['image'] = gets.chomp™
+    response = Unirest.post("#{base_url}/products", parameters: the_params)
+    pp response.body       
   end
