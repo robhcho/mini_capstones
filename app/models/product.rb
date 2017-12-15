@@ -10,13 +10,18 @@ class Product < ApplicationRecord
       id: id,
       name: name,
       price: price,
-      image: image,
       description: description,
       discounted?: is_discounted?,
       tax: tax,
       total: total,
-      in_stock?: in_stock?
+      in_stock?: in_stock?,
+      images: image,
+      supplier: supplier.as_json
     }
+  end
+
+  def supplier
+    supplier = Supplier.find_by(id: supplier_id)
   end
 
   def is_discounted?
