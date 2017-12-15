@@ -15,9 +15,13 @@ class Product < ApplicationRecord
       tax: tax,
       total: total,
       in_stock?: in_stock?,
-      images: image,
+      images: images,
       supplier: supplier.as_json
     }
+  end
+
+  def images
+    images = Image.where(product_id: id)
   end
 
   def supplier
