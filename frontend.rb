@@ -12,6 +12,7 @@ p '[5] Remove an product'
 p '[6] See all the suppliers'
 p '[7] See a particular supplier'
 p '[8] Add a supplier'
+p '[9] Sign Up'
 user_input = gets.chomp
   if user_input == '1'
     response = Unirest.get("#{base_url}/products")
@@ -80,5 +81,15 @@ user_input = gets.chomp
     p 'Insert an image of your product'
     the_params['image'] = gets.chomp™
     response = Unirest.post("#{base_url}/products", parameters: the_params)
-    pp response.body       
+    pp response.body
+  elsif user_input == '9'
+    the_params = {}
+    p 'Enter your username'
+    the_params['name'] = gets.chomp
+    p 'Enter your email'
+    the_params['email'] = gets.chomp
+    p 'Enter your password'
+    the_params['password'] = gets.chomp
+    p 'Confirm password (re-enter your password)'
+    the_params['password_confirmation']
   end

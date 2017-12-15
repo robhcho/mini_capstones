@@ -1,4 +1,7 @@
 class Product < ApplicationRecord
+  belongs_to :supplier
+  has_many :images
+  
   validates :name, uniqueness: true
   validates :name, presence: true
   validates :price, presence: true
@@ -15,18 +18,18 @@ class Product < ApplicationRecord
       tax: tax,
       total: total,
       in_stock?: in_stock?,
-      images: images,
+      images: images.as_json,
       supplier: supplier.as_json
     }
   end
 
-  def images
-    images = Image.where(product_id: id)
-  end
+  # def images
+  #   images = Image.where(product_id: id)
+  # end
 
-  def supplier
-    supplier = Supplier.find_by(id: supplier_id)
-  end
+  # def supplier
+  #   supplier = Supplier.find_by(id: supplier_id)
+  # end
 
   def is_discounted?
     price < 2
