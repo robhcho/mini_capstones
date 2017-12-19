@@ -11,18 +11,18 @@ class ProductsController < ApplicationController
   end
 
   def show
-    id_number = params['id']
+    id_number = params[:id]
     product = Product.find_by(id: id_number)
     render json: product.as_json
   end
 
   def create
     product = Product.new(
-      name: params['name'],
-      price: params['price'],
-      image: params['image'],
-      description: params['description'],
-      in_stock?: params['in_stock?']
+      name: params[:name],
+      price: params[:price],
+      image: params[:image],
+      description: params[:description],
+      in_stock?: params[:in_stock?]
     )
     if product.save
       render json: product.as_json
@@ -34,19 +34,19 @@ class ProductsController < ApplicationController
   def update
     id_number = params[:id]
     product = Product.find_by(id: id_number)
-    product.name = params['name'] || product.name
-    product.price = params['price'] || product.price
-    product.image = params['image'] || product.image
-    product.description = params['description'] || product.description
+    product.name = params[:name] || product.name
+    product.price = params[:price] || product.price
+    product.image = params[:image] || product.image
+    product.description = params[:description] || product.description
     if product.save
-        render json: product.as_json
+      render json: product.as_json
     else
-        render json: { errors: product.errors.full_messages }
+      render json: { errors: product.errors.full_messages }
     end
   end
 
   def destroy
-    id_number = params['id']
+    id_number = params[:id]
     product = Product.find_by(id: id_number)
     product.destroy
 

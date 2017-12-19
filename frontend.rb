@@ -16,6 +16,8 @@ while true
     p '[9] Sign up'
     p '[10] Log in'
     p '[11] Log out'
+    p '[12] Place an order'
+    p '[13] View your orders'
     p " Type 'exit' to leave "
     user_input = gets.chomp
       if user_input == '1'
@@ -108,16 +110,27 @@ while true
                 email: user_email,
                 password: user_password
             }
-          }
+            }
         )
         jwt = response.body["jwt"]
         Unirest.default_header("Authorization", "Bearer #{jwt}")
         p jwt
         elsif user_input == '11'
-            jwt = ""
-            Unirest.clear_default_headers()
-            p jwt
+          jwt = ''
+          Unirest.clear_default_headers()
+          p jwt
+        elsif user_input == '12'
+            the_params = {}
+            p 'Which item would you like to order? Enter the id of the product'
+            the_params[:product_id] = gets.chomp
+            p 'How many would you like to order?'
+            the_params[:quantity] = gets.chomp
+            response = Unirest.post("#{base_url}/orders", parameters: the_params)
+            pp response.body
+        elsif user_input == '13'
+            response = Unirest.get("#{base_url}/orders")
+            pp response.body
         elsif user_input == 'exit'
-            break
+          break
     end
   end
