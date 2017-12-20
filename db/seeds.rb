@@ -1,7 +1,10 @@
+# products = Product.all
+
 # products.each do |product|
 #   Image.create!(
 #     url: 'url',
-#     product_id: product.id)
+#     product_id: product.id
+#   )
 # end
 
 # Product.destroy_all

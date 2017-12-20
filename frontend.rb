@@ -6,6 +6,7 @@ while true
     p 'Choose an option'
     p '[1] See all products'
     p '[1b] Search through products'
+    p '[1c] View all products in a particular category'
     p '[2] See one particular product'
     p '[3] Add a product to the database'
     p '[4] Update a product'
@@ -27,6 +28,11 @@ while true
         p 'What product would you like to search for?'
         search_input = gets.chomp
         response = Unirest.get("#{base_url}/products", parameters: { search_name: search_input })
+        pp response.body
+      elsif user_input == '1c'
+        p 'Enter the id number of the category you would like to view'
+        user_input_id = gets.chomp
+        response = Unirest.get("#{base_url}/products?input_category_id=#{user_input_id}")
         pp response.body
       elsif user_input == '2'
         p 'What is the id number of the product you would like to view?'
