@@ -19,6 +19,8 @@ while true
     p '[11] Log out'
     p '[12] Place an order'
     p '[13] View your orders'
+    p '[14] Add product to your cart'
+    p '[15] View your cart'
     p " Type 'exit' to leave "
     user_input = gets.chomp
       if user_input == '1'
@@ -121,22 +123,33 @@ while true
         jwt = response.body["jwt"]
         Unirest.default_header("Authorization", "Bearer #{jwt}")
         p jwt
-        elsif user_input == '11'
+      elsif user_input == '11'
           jwt = ''
           Unirest.clear_default_headers()
           p jwt
-        elsif user_input == '12'
-            the_params = {}
-            p 'Which item would you like to order? Enter the id of the product'
-            the_params[:product_id] = gets.chomp
-            p 'How many would you like to order?'
-            the_params[:quantity] = gets.chomp
-            response = Unirest.post("#{base_url}/orders", parameters: the_params)
-            pp response.body
-        elsif user_input == '13'
-            response = Unirest.get("#{base_url}/orders")
-            pp response.body
-        elsif user_input == 'exit'
+      elsif user_input == '12'
+          the_params = {}
+          p 'Which item would you like to order? Enter the id of the product'
+          the_params[:product_id] = gets.chomp
+          p 'How many would you like to order?'
+          the_params[:quantity] = gets.chomp
+          response = Unirest.post("#{base_url}/orders", parameters: the_params)
+          pp response.body
+      elsif user_input == '13'
+          response = Unirest.get("#{base_url}/orders")
+          pp response.body
+      elsif user_input == '14'
+          the_params = {}
+          p 'Which product(s) would you like to add to your cart?'
+          the_params[:product_id] = gets.chomp
+          p 'How many do you want?'
+          the_params[:quantity] = gets.chomp
+          response = Unirest.post("#{base_url}/carted_products", parameters: the_params)
+          pp response.body
+      elsif user_input == '15'
+        response = Unirest.get("#{base_url}/carted_products")
+        pp response.body
+      elsif user_input == 'exit'
           break
     end
   end
