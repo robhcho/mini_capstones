@@ -22,7 +22,8 @@ class Product < ApplicationRecord
       total: total,
       in_stock?: in_stock?,
       images: images.as_json,
-      supplier: supplier.as_json
+      supplier: supplier.as_json,
+      categories: categories.as_json
       
     }
   end

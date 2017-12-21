@@ -9,11 +9,11 @@ class ProductsController < ApplicationController
       sort_attribute = :id
     end
     products = Product.order(sort_attribute).where("name LIKE ?", "%#{search_name}%")
-    # render json: products.as_json
-    
-    category = Category.find_by(id: params[:input_category_id])
-    products = category.products
     render json: products.as_json
+    
+    # category = Category.find_by(id: params[:input_category_id])
+    # products = category.products
+    # render json: products.as_json
   end
 
   def show
