@@ -17,7 +17,7 @@ while true
     p '[9] Sign up'
     p '[10] Log in'
     p '[11] Log out'
-    p '[12] Place an order'
+    p '[12] Place your order'
     p '[13] View your orders'
     p '[14] Add product to your cart'
     p '[15] View your cart'
@@ -129,11 +129,11 @@ while true
           p jwt
       elsif user_input == '12'
           the_params = {}
-          p 'Which item would you like to order? Enter the id of the product'
-          the_params[:product_id] = gets.chomp
-          p 'How many would you like to order?'
-          the_params[:quantity] = gets.chomp
-          response = Unirest.post("#{base_url}/orders", parameters: the_params)
+          p 'Which item would you like to purchase?'
+          the_params[:id] = gets.chomp
+          # p 'How many would you like to order?'
+          # the_params[:quantity] = gets.chomp
+          response = Unirest.post("#{base_url}/orders?", parameters: the_params)
           pp response.body
       elsif user_input == '13'
           response = Unirest.get("#{base_url}/orders")

@@ -7,16 +7,18 @@ class OrdersController < ApplicationController
 
   def create
     tax_rate = 0.09
+    carted_product = CartedProduct.find_by(id: params[:id])
+    # product = carted_products[0]
     # product = Product.find_by(id: params[:product_id])
-    carted_products = CartedProduct.find_by(status: 'carted')
-    calculated_subtotal = carted_product.price * params[:quantity].to_i
+    # carted_products = CartedProduct.find_by(status: 'carted')
+    calculated_subtotal = carted_product.product.price * carted_product.quantity.to_i
     calculated_tax = calculated_subtotal * tax_rate
     calculated_total = calculated_subtotal + calculated_tax
 
     order = Order.new(
       user_id: current_user.id,
       # carted_products: params[:product_id],
-      quantity: params[:quantity],
+      # quantity: params[:quantity],
       subtotal: calculated_subtotal,
       tax: calculated_tax,
       total: calculated_total
@@ -24,7 +26,7 @@ class OrdersController < ApplicationController
     if order.save
       render json: order.as_json
     else
-      render json: {errors: order.errors.full_messages }
+      render json: { errors: order.errors.full_messages }
     end
   end
 end
