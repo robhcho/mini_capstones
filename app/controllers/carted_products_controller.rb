@@ -1,8 +1,10 @@
 class CartedProductsController < ApplicationController
   def index
     if current_user
-      carted_products = CartedProduct.where(user_id: current_user.id)
-      # carted_products = current_user.carted_products
+      p 'the current user is'
+      p current_user
+      # carted_products = CartedProduct.where(user_id: current_user.id).where(status: 'carted')
+      carted_products = current_user.carted_products.where(status: 'carted')
       render json: carted_products.as_json
     else
       render json: {}
@@ -21,5 +23,11 @@ class CartedProductsController < ApplicationController
     else
       render json: { errors: carted_product.errors.full_messages }
     end
+  end
+
+  def destroy
+    carted_product = CartedProduct.find(params[:id])
+    carted_product.update(status: 'removed')
+    render json: { message: 'you removed the product' }
   end
 end

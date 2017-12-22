@@ -21,6 +21,7 @@ while true
     p '[13] View your orders'
     p '[14] Add product to your cart'
     p '[15] View your cart'
+    p '[16] Remove an item from your cart'
     p " Type 'exit' to leave "
     user_input = gets.chomp
       if user_input == '1'
@@ -72,10 +73,10 @@ while true
         response = Unirest.patch("#{base_url}/products/#{product_id}", parameters: the_params)
         pp response.body
       elsif user_input == '5'
-        p 'Which item would you like to remove?'
+        p 'Which product would you like to remove?'
         product_id = gets.chomp
         response = Unirest.delete("#{base_url}/products/#{product_id}")
-        p "You removed item #{product_id}"
+        p "You removed product #{product_id}"
       elsif user_input == '6'
         response = Unirest.get("#{base_url}/suppliers")
         pp response.body
@@ -128,19 +129,20 @@ while true
           Unirest.clear_default_headers()
           p jwt
       elsif user_input == '12'
-          the_params = {}
-          p 'Which item would you like to purchase?'
-          the_params[:id] = gets.chomp
+          # the_params = {}
+          # p 'Which product would you like to purchase?'
+          # the_params[:input_carted_product_id] = gets.chomp
           # p 'How many would you like to order?'
           # the_params[:quantity] = gets.chomp
-          response = Unirest.post("#{base_url}/orders?", parameters: the_params)
+          response = Unirest.post("#{base_url}/orders/")
+          # response = Unirest.post("#{base_url}/orders?", parameters: the_params)
           pp response.body
       elsif user_input == '13'
           response = Unirest.get("#{base_url}/orders")
           pp response.body
       elsif user_input == '14'
           the_params = {}
-          p 'Which product(s) would you like to add to your cart?'
+          p 'Which product would you like to add to your cart?'
           the_params[:product_id] = gets.chomp
           p 'How many do you want?'
           the_params[:quantity] = gets.chomp
@@ -149,6 +151,14 @@ while true
       elsif user_input == '15'
         response = Unirest.get("#{base_url}/carted_products")
         pp response.body
+      elsif user_input == '16'
+        response = Unirest.get("")
+        p 'Which product would you like to remove?'
+        product_id = gets.chomp
+        if product == 'q'
+        else
+            response = Unirest.delete("#{base_url}/carted_products/#{product_id}")
+            pp response.body
       elsif user_input == 'exit'
           break
     end
