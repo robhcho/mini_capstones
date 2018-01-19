@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  belongs_to :supplier
+  # belongs_to :supplier
   has_many :images
   has_many :orders, through: :carted_products
   has_many :category_products
@@ -23,7 +23,7 @@ class Product < ApplicationRecord
       total: total,
       in_stock?: in_stock?,
       images: images.as_json,
-      supplier: supplier.as_json,
+      # supplier: supplier.as_json,
       categories: categories.as_json
       
     }

@@ -159,6 +159,7 @@ while true
         else
             response = Unirest.delete("#{base_url}/carted_products/#{product_id}")
             pp response.body
+        end
       elsif user_input == 'exit'
           break
     end

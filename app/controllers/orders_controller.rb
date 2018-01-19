@@ -33,7 +33,6 @@ class OrdersController < ApplicationController
       carted_products.update_all(status: 'purchased', order_id: order.id)
       # carted_products. each do |carted_product|
       #   carted_product.update(status: "purchased")
-      end
       render json: order.as_json
     else
       render json: { errors: order.errors.full_messages }

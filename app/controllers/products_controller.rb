@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_admin, only: [:create, :update, :destroy]
+  # before_action :authenticate_admin, only: [:create, :update, :destroy]
 
   def index
     search_name = params[:search_name]
@@ -26,10 +26,11 @@ class ProductsController < ApplicationController
     product = Product.new(
       name: params[:name],
       price: params[:price],
-      image: params[:image],
+      # image: params[:image],
       description: params[:description],
-      in_stock?: params[:in_stock?]
+      in_stock: params[:in_stock?]
     )
+    p current_user
     if product.save
       render json: product.as_json
     else
@@ -42,7 +43,7 @@ class ProductsController < ApplicationController
     product = Product.find_by(id: id_number)
     product.name = params[:name] || product.name
     product.price = params[:price] || product.price
-    product.image = params[:image] || product.image
+    # product.image = params[:image] || product.image
     product.description = params[:description] || product.description
     if product.save
       render json: product.as_json
